@@ -18,7 +18,6 @@ public class Recipe {
     @Size(min = 3, max = 45)
     private String name;
     @NotNull
-    @Size(min = 3,message = "Description must be more than 2 characters!")
     private String description;
     @NotNull
     private String image;

@@ -33,7 +33,7 @@ public class UsersController {
     }
 
     @PostMapping("/registration")
-    public String registration(@Valid @ModelAttribute("user") User user, BindingResult result, Model model) {
+    public String registration(@Valid @ModelAttribute("user") User user, BindingResult result, Model model,HttpSession session) {
         userValidator.validate(user, result);
         if (result.hasErrors()) {
             return "registrationPage.jsp";
@@ -43,7 +43,7 @@ public class UsersController {
     }
 
     @RequestMapping("/login")
-    public String login(@RequestParam(value="error", required=false) String error, @RequestParam(value="logout", required=false) String logout, Model model) {
+    public String login(@RequestParam(value="error", required=false) String error, @RequestParam(value="logout", required=false) String logout, Model model,HttpSession session) {
         if(error != null) {
             model.addAttribute("errorMessage", "Invalid Credentials, Please try again.");
         }
@@ -53,9 +53,11 @@ public class UsersController {
         return "loginPage.jsp";
     }
     @RequestMapping(value = {"/", "/home"})
-    public String home(Principal principal, Model model) {
+    public String home(Principal principal, Model model,HttpSession session) {
         String username = principal.getName();
         model.addAttribute("currentUser", userService.findByUsername(username));
+        User user1 = userService.findByUsername(username);
+        session.setAttribute("userId",user1.getId());
         return "homePage.jsp";
     }
 
@@ -65,6 +67,7 @@ public class UsersController {
         model.addAttribute("currentUser", userService.findByUsername(username));
         return "adminPage.jsp";
     }
+
 
 }
 
