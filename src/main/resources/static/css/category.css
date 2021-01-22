@@ -1,0 +1,23 @@
+.box0{
+	display:flex;
+}
+.box{
+	margin:40px;
+	display:block;
+}
+.imag{
+	width:150px;
+	height:150px;
+	border:1px ;
+}
+
+.show{
+	display:flex;
+	height:300px;
+	justify-content:space-around;
+	vertical-align:center;
+}
+.left{
+	text-align:center;
+	vertical-align:center;
+}

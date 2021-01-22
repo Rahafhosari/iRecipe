@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -35,6 +36,11 @@
                     </div>
                     <div><button type="submit" class="btn btn-login float-right">Login</button></div>
                 </form>
+                <div class="form-check">
+                    <c:if test="${logoutMessage != null}">
+                        <c:out value="${logoutMessage}"></c:out>
+                    </c:if>
+                </div>
                 <div class="copy-text">
                 <p>Not Registered Yet?<a href="/registration"> Register Now! </a></p>
                 </div>

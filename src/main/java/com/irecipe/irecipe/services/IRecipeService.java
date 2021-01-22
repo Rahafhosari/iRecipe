@@ -1,9 +1,6 @@
 package com.irecipe.irecipe.services;
 
-import com.irecipe.irecipe.models.Category;
-import com.irecipe.irecipe.models.Comment;
-import com.irecipe.irecipe.models.Favorite;
-import com.irecipe.irecipe.models.Recipe;
+import com.irecipe.irecipe.models.*;
 import com.irecipe.irecipe.repositories.*;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +15,7 @@ public class IRecipeService {
     private final RecipeRepository recipeRepo;
     private final RoleRepository roleRepo;
     private final UserRepository userRepo;
+
 
     public IRecipeService(CategoryRepository catRepo, CommentRepository commentRepo, FavoriteRepository favRepo, RecipeRepository recipeRepo, RoleRepository roleRepo, UserRepository userRepo) {
         this.catRepo = catRepo;
@@ -52,15 +50,15 @@ public class IRecipeService {
             return null;
         }
     }
-    public Category findByIdC(Long id) {
-        Optional<Category> optionalCategory = catRepo.findById(id);
-        if(optionalCategory.isPresent()) {
-            return optionalCategory.get();
-        } else {
-            return null;
-        }
+
+    public Category findCategory(Long id) {
+        return this.catRepo.findById(id).orElse(null);
     }
+
 //find recpies in category
     public List<Recipe> findRecipeByCategory(Category category){ return recipeRepo.findByCategoryContains(category);}
 
+//User
+    public User findUserById(Long id) {return userRepo.findById(id).orElse(null);}
+    public User updateUser(User user) {return userRepo.save(user);}
 }

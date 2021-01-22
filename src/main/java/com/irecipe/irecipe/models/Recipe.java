@@ -40,7 +40,7 @@ public class Recipe {
     @JoinColumn(name="category_id")
     private Category category;
 
-    @OneToMany(mappedBy="recipe", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy="recipe", fetch = FetchType.LAZY,cascade=CascadeType.REMOVE)
     private List<Comment> comment;
 
     public Recipe() {}
