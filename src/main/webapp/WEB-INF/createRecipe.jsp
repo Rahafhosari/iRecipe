@@ -5,10 +5,19 @@
 <head>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"/>
     <link rel="stylesheet" type="text/css" href="css/style.css">
-    <title>Create License</title>
+    <!-- Title -->
+    <title>iRecipe | Create Recipe</title>
+    <!-- Favicon -->
+    <link rel="icon" href="${pageContext.request.contextPath}/img/core-img/favicon.ico">
+    <!-- Core Stylesheet -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/style.css">
 </head>
 <body>
 <center>
+    <h2><a href="/admin">Back</a></h2>
+    <div class="container">
+        <div class="createEvent">
+            <h3>Edit Your Recipe</h3>
     <form:form action="/recipes" method="post" modelAttribute="recipe">
 
         <div class="form-group">
@@ -42,8 +51,10 @@
             </form:select>
         </div>
 
-        <input type="submit" value="Create" class="btn btn-primary"/>
+        <input type="submit" style="background: #f14444;border-color: #f14444; color: whitesmoke" value="Create" class="btn btn-primary"/>
     </form:form>
+        </div>
+    </div>
 </center>
 </body>
 </html>

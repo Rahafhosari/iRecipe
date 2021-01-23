@@ -17,7 +17,7 @@
     <title>iRecipe | About US</title>
 
     <!-- Favicon -->
-    <link rel="icon" href="img/core-img/favicon.ico">
+    <link rel="icon" href="${pageContext.request.contextPath}/img/core-img/favicon.ico">
 
     <!-- Core Stylesheet -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/style.css">
@@ -153,7 +153,7 @@
                 <nav class="classy-navbar justify-content-between" id="deliciousNav">
 
                     <!-- Logo -->
-                    <p>Welcome <c:out value="${currentUser.username}"></c:out></p>
+                    <p>Welcome <c:out value="${user.username}"></c:out></p>
 
                     <a class="nav-brand" href="/home"><img src="img/core-img/irecipefinalcut200.png" alt="logo"></a>
 
@@ -173,25 +173,25 @@
                         <!-- Nav Start -->
                         <div class="classynav">
                             <ul>
-                                <li><a href="home">Home</a></li>
-                                <li><a href="test">Recipes</a></li>
+                                <li><a href="/home">Home</a></li>
+                                <li><a href="/api">Search</a></li>
                                 <li><a>Categories</a>
                                     <ul class="dropdown">
-                                        <li><a href="categories/1">Main Courses</a></li>
-                                        <li><a href="categories/2">Desserts</a></li>
+                                        <li><a href="/categories/1">Main Courses</a></li>
+                                        <li><a href="/categories/2">Desserts</a></li>
                                     </ul>
                                 </li>
                                 <li class="active"><a href="about">About</a></li>
                                 <c:choose>
-                                    <c:when test="${currentUser.id==null }">
+                                    <c:when test="${user.id==null }">
                                         <li><a href="/login">Login</a></li>
                                     </c:when>
                                     <c:otherwise>
                                         <c:choose>
-                                            <c:when test="${currentUser.id!=null }">
+                                            <c:when test="${user.id!=null }">
                                                 <form style="float:right;" id="logoutForm" method="POST" action="/logout">
                                                     <li><input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/></li>
-                                                    <li><a><input type="submit" value="Logout!" class="btn btn-outline-success" /></a></li>
+                                                    <li><a><input type="submit" value="Logout!" class="btn btn-outline-success" style=" color: #f14444;background-color: transparent;background-image: none;border-color: #f14444;"/></a></li>
                                                 </form>
                                             </c:when>
                                         </c:choose>
@@ -201,13 +201,13 @@
                                 <!-- Admin Only -->
                                 <li>
                                     <c:choose>
-                                        <c:when test="${currentUser.roles.get(0).name == 'ROLE_ADMIN' }">
+                                        <c:when test="${user.roles.get(0).name == 'ROLE_ADMIN' }">
                                             <p><a href="admin">Admin</a></p>
                                         </c:when>
                                         <c:otherwise>
                                             <c:choose>
-                                                <c:when test="${currentUser.roles.get(0).name == 'ROLE_USER' }">
-                                                    <p><a href="users/${currentUser.id}">Favorites</a></p>
+                                                <c:when test="${user.roles.get(0).name == 'ROLE_USER' }">
+                                                    <p><a href="users/${user.id}">Favorites</a></p>
                                                 </c:when>
                                             </c:choose>
                                         </c:otherwise>
@@ -234,7 +234,7 @@
         <div class="project-hover">
             <h2>iRecipe</h2>
             <hr />
-            <p> Our team loves food and the way it helps us take care of our bodies. WE combine this with ideas that will help us rethink the idea of food in general giving you tools to be successful, healthy and happy.</p>
+            <p style="color: whitesmoke;"> Our team loves food and the way it helps us take care of our bodies. WE combine this with ideas that will help us rethink the idea of food in general giving you tools to be successful, healthy and happy.</p>
             <a href="/home">Home </a>
         </div>
     </div>
@@ -242,7 +242,7 @@
         <div class="project-hover">
             <h2>iRecipe</h2>
             <hr />
-            <p>Our team has a passion for the foods of different cultures, travel the world through our recipes</p>
+            <p style="color: whitesmoke;">Our team has a passion for the foods of different cultures, travel the world through our recipes</p>
             <a href="/home">Home </a>
         </div>
     </div>
@@ -250,7 +250,7 @@
         <div class="project-hover">
             <h2>iRecipe</h2>
             <hr />
-            <p> Our Website brings professional recipes to your home for you to  prepare delicious, customized meals.</p>
+            <p style="color: whitesmoke;"> Our Website brings professional recipes to your home for you to  prepare delicious, customized meals.</p>
             <a href="/home">Home</a>
         </div>
     </div>

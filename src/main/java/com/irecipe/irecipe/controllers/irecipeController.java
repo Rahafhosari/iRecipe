@@ -39,13 +39,15 @@ public class irecipeController {
             return "createRecipe.jsp";
         } else {
             this.irecipeService.createRecipe(recipe);
-
-            return "createRecipe.jsp";
+            return "redirect:/admin";
         }
     }
 
     @RequestMapping("/categories/{id}")
     public String categories(@PathVariable("id") Long id, Model model,@ModelAttribute("category") Category category,HttpSession session) {
+        Long userId = (Long) session.getAttribute("userId");
+        User u = irecipeService.findUserById(userId);
+        model.addAttribute("currentUser", u);
         Category category1 = irecipeService.findCategory(id);
         model.addAttribute("category", category1);
 //        List<Recipe> recipesInCategory = irecipeService.findRecipeByCategory(category1);
@@ -65,13 +67,12 @@ public class irecipeController {
         return "showRecipe.jsp";
     }
 
-    @PostMapping("/addComment")
-    public String addComment(@ModelAttribute("comm") Comment comment, Model model, HttpSession session) {
+    @PostMapping("/addComment/{id}")
+    public String addComment(@PathVariable("id") Long recipe_id,@ModelAttribute("comm") Comment comment, Model model, HttpSession session) {
         User user = irecipeService.findUserById((Long) session.getAttribute("userId"));
         model.addAttribute("user", user);
         irecipeService.createComment(comment);
-        return "redirect:/home";
-
+        return "redirect:/recipes/"+recipe_id;
     }
 
     //Method to favorite a Recipe
@@ -84,7 +85,17 @@ public class irecipeController {
         attendees.add(attendee);
         rec.setUser(attendees);
         irecipeService.updateUser(attendee);
-        return "redirect:/";
+        return "redirect:/recipes/"+id;
+    }
+    @GetMapping(value = "/recipes/{id}/unfav")
+    public String unfav (@PathVariable("id")Long id, HttpSession session) {
+        User attendee = irecipeService.findUserById((Long) session.getAttribute("userId"));
+        Recipe rec = irecipeService.findByIdR(id);
+        List<User> attendees = rec.getUser();
+        attendees.remove(attendee);
+        rec.setUser(attendees);
+        irecipeService.updateUser(attendee);
+        return "redirect:/recipes/"+id;
     }
 
     @GetMapping("/")
@@ -95,7 +106,7 @@ public class irecipeController {
 //Methods for Edit and Update Recipe by the Admin
 
     @RequestMapping("/recipes/update/{id}")
-    public String editEvent(@PathVariable("id") Long id, Model model) {
+    public String editRecipe(@PathVariable("id") Long id, Model model) {
         Recipe recipe = irecipeService.findByIdR(id);
         model.addAttribute("recipe", recipe);
         return "editRecipe.jsp";
@@ -107,7 +118,7 @@ public class irecipeController {
             return "editRecipe.jsp";
         } else {
             this.irecipeService.updateRecipe(recipe);
-            return "redirect:/recipes/"+recipe.getId();
+            return "redirect:/admin";
         }}
 
     //Method to delete a Recipe by the Admin

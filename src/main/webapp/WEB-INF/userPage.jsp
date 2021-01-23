@@ -18,6 +18,11 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/style.css">
 </head>
 <body>
+<!-- Preloader -->
+<div id="preloader">
+	<i class="circle-preloader"></i>
+	<img src="${pageContext.request.contextPath}/img/core-img/iRecipe_icon_original.png" alt="">
+</div>
 <!-- ##### Header Area Start ##### -->
 <header class="header-area">
 
@@ -61,7 +66,7 @@
 				<nav class="classy-navbar justify-content-between" id="deliciousNav">
 
 					<!-- Logo -->
-					<p>Welcome <c:out value="${currentUser.username}"></c:out></p>
+					<p>Welcome <c:out value="${user.username}"></c:out></p>
 
 					<a class="nav-brand" href="/home"><img src="${pageContext.request.contextPath}/img/core-img/irecipefinalcut200.png" alt="logo"></a>
 
@@ -82,7 +87,7 @@
 						<div class="classynav">
 							<ul>
 								<li class="active"><a href="/home">Home</a></li>
-								<li><a href="/test">Recipes</a></li>
+								<li><a href="/api">Search</a></li>
 								<li><a>Categories</a>
 									<ul class="dropdown">
 										<li><a href="/categories/1">Main Courses</a></li>
@@ -91,12 +96,12 @@
 								</li>
 								<li><a href="/about">About</a></li>
 								<c:choose>
-									<c:when test="${currentUser.id==null }">
+									<c:when test="${user.id==null }">
 										<li><a href="/login">Login</a></li>
 									</c:when>
 									<c:otherwise>
 										<c:choose>
-											<c:when test="${currentUser.id!=null }">
+											<c:when test="${user.id!=null }">
 												<form style="float:right;" id="logoutForm" method="POST" action="/logout">
 													<li><input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/></li>
 													<li><a><input type="submit" value="Logout!" class="btn btn-outline-success" /></a></li>
@@ -109,13 +114,13 @@
 								<!-- Admin Only -->
 								<li>
 									<c:choose>
-										<c:when test="${currentUser.roles.get(0).name == 'ROLE_ADMIN' }">
-											<p><a href="admin">Admin</a></p>
+										<c:when test="${user.roles.get(0).name == 'ROLE_ADMIN' }">
+											<p><a href="/admin">Admin</a></p>
 										</c:when>
 										<c:otherwise>
 											<c:choose>
-												<c:when test="${currentUser.roles.get(0).name == 'ROLE_USER' }">
-													<p><a href="users/${currentUser.id}">Favorites</a></p>
+												<c:when test="${user.roles.get(0).name == 'ROLE_USER' }">
+													<p><a href="/users/${user.id}">Favorites</a></p>
 												</c:when>
 											</c:choose>
 										</c:otherwise>
@@ -136,7 +141,7 @@
 </header>
 <!-- ##### Header Area End ##### -->
 <!-- ##### Tabs START ##### -->
-<div class="col-12 col-lg-6">
+<div class="col-12" style="display: flex; justify-content: center;">
 	<div class="delicious-tabs-content">
 		<ul class="nav nav-tabs" id="myTab" role="tablist">
 			<li class="nav-item">
@@ -154,10 +159,10 @@
 			<div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="tab--1">
 				<div class="delicious-tab-content">
 					<!-- Tab Text -->
-					<div class="delicious-tab-text">
-						<p>List of All Favourites</p>
+					<p>List of All Favourites</p>
+					<div class="delicious-tab-text" style="display:flex;">
 						<c:forEach items="${ recipes }" var="rec">
-							<div class="recipe">
+							<div class="recipe" style="margin-right: 10px;">
 								<div class="left">
 									<a href="/recipes/${ rec.id }">${ rec.name }</a></li>
 								</div>
@@ -172,12 +177,12 @@
 			<div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tab--2">
 				<div class="delicious-tab-content">
 					<!-- Tab Text -->
-					<div class="delicious-tab-text">
-						<p>List of Favourites Main Courses</p>
+					<p>List of Favourites Main Courses</p>
+					<div class="delicious-tab-text"style="display:flex;">
 						<c:forEach items="${ recipes }" var="rec">
 							<c:choose>
 							<c:when test="${rec.category.id == 1 }">
-							<div class="recipe">
+							<div class="recipe" style="margin-right: 10px;">
 								<div class="left">
 									<a href="/recipes/${ rec.id }">${ rec.name }</a></li>
 								</div>
@@ -194,12 +199,12 @@
 			<div class="tab-pane fade" id="tab3" role="tabpanel" aria-labelledby="tab--3">
 				<div class="delicious-tab-content">
 					<!-- Tab Text -->
-					<div class="delicious-tab-text">
-						<p>List of Favourites Desserts</p
+					<p>List of Favourites Desserts</p>
+					<div class="delicious-tab-text" style="display:flex;">
 						<c:forEach items="${ recipes }" var="rec">
 							<c:choose>
 							<c:when test="${rec.category.id == 2 }">
-								<div class="recipe">
+								<div class="recipe" style="margin-right: 10px;">
 									<div class="left">
 										<a href="/recipes/${ rec.id }">${ rec.name }</a></li>
 									</div>

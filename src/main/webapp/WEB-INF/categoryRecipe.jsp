@@ -2,9 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 
     <!-- Title -->
     <title>iRecipe | Categories</title>
@@ -66,6 +66,7 @@
         }
         .heading-title {
             margin-bottom: 100px;
+            margin-left: 50px;
         }
         .text-center {
             text-align: center;
@@ -184,11 +185,6 @@
 
 </head>
 <body>
-<!-- Preloader -->
-<div id="preloader">
-    <i class="circle-preloader"></i>
-    <img src="img/core-img/iRecipe_icon_original.png" alt="">
-</div>
 <!-- ##### Header Area Start ##### -->
 <header class="header-area">
 
@@ -252,12 +248,12 @@
                         <!-- Nav Start -->
                         <div class="classynav">
                             <ul>
-                                <li><a href="home">Home</a></li>
-                                <li><a href="test">Recipes</a></li>
+                                <li><a href="/home">Home</a></li>
+                                <li><a href="/api">Search</a></li>
                                 <li class="active"><a>Categories</a>
                                     <ul class="dropdown">
-                                        <li><a href="categories/1">Main Courses</a></li>
-                                        <li><a href="categories/2">Desserts</a></li>
+                                        <li><a href="/categories/1">Main Courses</a></li>
+                                        <li><a href="/categories/2">Desserts</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="about">About</a></li>
@@ -281,12 +277,12 @@
                                 <li>
                                     <c:choose>
                                         <c:when test="${currentUser.roles.get(0).name == 'ROLE_ADMIN' }">
-                                            <p><a href="admin">Admin</a></p>
+                                            <p><a href="/admin">Admin</a></p>
                                         </c:when>
                                         <c:otherwise>
                                             <c:choose>
                                                 <c:when test="${currentUser.roles.get(0).name == 'ROLE_USER' }">
-                                                    <p><a href="users/${currentUser.id}">Favorites</a></p>
+                                                    <p><a href="/users/${currentUser.id}">Favorites</a></p>
                                                 </c:when>
                                             </c:choose>
                                         </c:otherwise>
@@ -306,13 +302,13 @@
     </div>
 </header>
 <!-- ##### Header Area End ##### -->
-
+<center>
 <div class="cta-section black-trans-bg">
     <div class="container">
         <div class="row">
             <div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
                 <div class="cta-title">
-                    <h2>iRecipe,A Perfect Tasty  Plate leads to a happy tummy</h2>
+                    <h2>iRecipe A Perfect Tasty  Plate leads to a happy tummy</h2>
                 </div>
             </div>
         </div>
@@ -346,9 +342,9 @@
             </div>
         </div>
     </c:forEach>
-
     </div>
 </div>
+</center>
 <!-- ##### Footer Area Start ##### -->
 <footer class="footer-area">
     <div class="container h-100">

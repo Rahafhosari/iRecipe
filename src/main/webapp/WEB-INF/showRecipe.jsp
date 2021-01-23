@@ -11,7 +11,7 @@
     <title>iRecipe | ${recipe.name}</title>
 
     <!-- Favicon -->
-    <link rel="icon" href="img/core-img/favicon.ico">
+    <link rel="icon" href="${pageContext.request.contextPath}/img/core-img/favicon.ico">
 
     <!-- Core Stylesheet -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/style.css">
@@ -22,14 +22,15 @@
         padding: 55px 0;
     }
     #box{
-        height: 350px;
+        height: 300px;
         width: 600px;
+        overflow: auto;
         outline: 7px solid #f14444;
         margin-top: 20px;
         padding: 10px;
     }
     #box2{
-        max-height: 210px;
+        max-height: 120px;
         overflow: auto;
         width: 600px;
         outline: 7px solid #f14444;
@@ -200,11 +201,11 @@
     </style>
 </head>
 <body>
-<!-- Preloader -->
-<div id="preloader">
-    <i class="circle-preloader"></i>
-    <img src="img/core-img/iRecipe_icon_original.png" alt="">
-</div>
+<%--<!-- Preloader -->--%>
+<%--<div id="preloader">--%>
+<%--    <i class="circle-preloader"></i>--%>
+<%--    <img src="${pageContext.request.contextPath}/img/core-img/iRecipe_icon_original.png" alt="">--%>
+<%--</div>--%>
 <!-- ##### Header Area Start ##### -->
 <header class="header-area">
 
@@ -217,10 +218,10 @@
                     <div class="breaking-news">
                         <div id="breakingNewsTicker" class="ticker">
                             <ul>
-                                <li><a href="home">Welcome to iRecipe!</a></li>
+                                <li><a href="/home">Welcome to iRecipe!</a></li>
                                 <li><a href="#">A Perfect Tasty  Plate leads to a happy tummy!</a></li>
-                                <li><a href="categories">Categories</a></li>
-                                <li><a href="recipes">Recipes</a></li>
+                                <li><a href="/categories">Categories</a></li>
+                                <li><a href="/recipes">Recipes</a></li>
                             </ul>
                         </div>
                     </div>
@@ -248,9 +249,9 @@
                 <nav class="classy-navbar justify-content-between" id="deliciousNav">
 
                     <!-- Logo -->
-                    <p>Welcome <c:out value="${currentUser.username}"></c:out></p>
+                    <p>Welcome <c:out value="${user.username}"></c:out></p>
 
-                    <a class="nav-brand" href="/home"><img src="img/core-img/irecipefinalcut200.png" alt="logo"></a>
+                    <a class="nav-brand" href="/home"><img src="${pageContext.request.contextPath}/img/core-img/irecipefinalcut200.png" alt="logo"></a>
 
                     <!-- Navbar Toggler -->
                     <div class="classy-navbar-toggler">
@@ -268,22 +269,22 @@
                         <!-- Nav Start -->
                         <div class="classynav">
                             <ul>
-                                <li class="active"><a href="home">Home</a></li>
-                                <li><a href="test">Recipes</a></li>
-                                <li><a>Categories</a>
+                                <li><a href="/home">Home</a></li>
+                                <li><a href="/api">Search</a></li>
+                                <li class="active"><a>Categories</a>
                                     <ul class="dropdown">
-                                        <li><a href="categories/1">Main Courses</a></li>
-                                        <li><a href="categories/2">Desserts</a></li>
+                                        <li><a href="/categories/1">Main Courses</a></li>
+                                        <li><a href="/categories/2">Desserts</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="about">About</a></li>
+                                <li><a href="/about">About</a></li>
                                 <c:choose>
-                                    <c:when test="${currentUser.id==null }">
+                                    <c:when test="${user.id == null }">
                                         <li><a href="/login">Login</a></li>
                                     </c:when>
                                     <c:otherwise>
                                         <c:choose>
-                                            <c:when test="${currentUser.id!=null }">
+                                            <c:when test="${user.id != null }">
                                                 <form style="float:right;" id="logoutForm" method="POST" action="/logout">
                                                     <li><input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/></li>
                                                     <li><a><input type="submit" value="Logout!" class="btn btn-outline-success" /></a></li>
@@ -296,13 +297,13 @@
                                 <!-- Admin Only -->
                                 <li>
                                     <c:choose>
-                                        <c:when test="${currentUser.roles.get(0).name == 'ROLE_ADMIN' }">
-                                            <p><a href="admin">Admin</a></p>
+                                        <c:when test="${user.roles.get(0).name == 'ROLE_ADMIN' }">
+                                            <p><a href="/admin">Admin</a></p>
                                         </c:when>
                                         <c:otherwise>
                                             <c:choose>
-                                                <c:when test="${currentUser.roles.get(0).name == 'ROLE_USER' }">
-                                                    <p><a href="users/${currentUser.id}">Favorites</a></p>
+                                                <c:when test="${user.roles.get(0).name == 'ROLE_USER' }">
+                                                    <p><a href="/users/${user.id}">Favorites</a></p>
                                                 </c:when>
                                             </c:choose>
                                         </c:otherwise>
@@ -327,7 +328,7 @@
         <div class="row">
             <div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
                 <div class="cta-title">
-                    <h2>IRecipe,A Perfect Tasty  Plate leads to a happy tummy</h2>
+                    <h2>iRecipe A Perfect Tasty  Plate leads to a happy tummy</h2>
                 </div>
             </div>
         </div>
@@ -339,7 +340,7 @@
         <div class="col-md-4 col-sm-4">
             <div class="team-member">
                 <div class="team-img">
-                    <img  style="padding-top: 15px;" src="/img/${recipe.image}.jpg" alt="team member" class="img-responsive">
+                    <img  style="padding-top: 15px;" src="${pageContext.request.contextPath}/img/${recipe.image}.jpg" alt="team member" class="img-responsive">
                 </div>
                 <div class="team-hover">
                     <div class="desk">
@@ -348,7 +349,14 @@
                 </div>
             </div>
             <div class="team-title">
-                <h5>${recipe.name}<br><a href="/recipes/${recipe.id}/fav" style="color: #f14444"> ADD to Favourite</a></h5>
+                <c:choose>
+                    <c:when test="${recipe.user.contains(user) }">
+                        <h5>${recipe.name}<br><a href="/recipes/${recipe.id}/unfav" style="color: #f14444"> UnFavourite</a></h5>
+                    </c:when>
+                    <c:otherwise>
+                        <h5>${recipe.name}<br><a href="/recipes/${recipe.id}/fav" style="color: #f14444"> ADD to Favourite</a></h5>
+                    </c:otherwise>
+                </c:choose>
             </div>
 
         </div>
@@ -357,7 +365,7 @@
                     ${recipe.description}
             </div>
             <div class="team-member" id="box2">
-                <form:form action="/addComment" method="POST" modelAttribute="comm">
+                <form:form action="/addComment/${recipe.id}" method="POST" modelAttribute="comm">
                     <div class="form-group">
                         <form:input cssClass="txtbox" type="textarea" path="comment"/>
                         <form:label path="comment" cssStyle="color: #f14444">Add Comment</form:label>
@@ -397,7 +405,7 @@
                 </div>
                 <!-- Footer Logo -->
                 <div class="footer-logo">
-                    <a href="/home"><img src="img/core-img/irecipefinalcut200.png" alt="irecipe"></a>
+                    <a href="/home"><img src="${pageContext.request.contextPath}/img/core-img/irecipefinalcut200.png" alt="irecipe"></a>
                 </div>
                 <!-- Copywrite -->
                 <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
@@ -411,14 +419,14 @@
 
 <!-- ##### All Javascript Files ##### -->
 <!-- jQuery-2.2.4 js -->
-<script src="js/jquery/jquery-2.2.4.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery/jquery-2.2.4.min.js"></script>
 <!-- Popper js -->
-<script src="js/bootstrap/popper.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/bootstrap/popper.min.js"></script>
 <!-- Bootstrap js -->
-<script src="js/bootstrap/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/bootstrap/bootstrap.min.js"></script>
 <!-- All Plugins js -->
-<script src="js/plugins/plugins.js"></script>
+<script src="${pageContext.request.contextPath}/js/plugins/plugins.js"></script>
 <!-- Active js -->
-<script src="js/active.js"></script>
+<script src="${pageContext.request.contextPath}/js/active.js"></script>
 </body>
 </html>

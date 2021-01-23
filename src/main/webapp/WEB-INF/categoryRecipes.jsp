@@ -19,7 +19,7 @@
 	
 	<div class="box">
 		<h1>${category.name}</h1>
-		<p>${category.description}</p>
+		<p>${category.description</p>
 		</div>
 	</div>	
 		<hr />

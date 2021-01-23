@@ -14,7 +14,7 @@
     <title>iRecipe - Food Blog | Home</title>
 
     <!-- Favicon -->
-    <link rel="icon" href="img/core-img/favicon.ico">
+    <link rel="icon" href="${pageContext.request.contextPath}/img/core-img/favicon.ico">
 
     <!-- Core Stylesheet -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/style.css">
@@ -107,14 +107,14 @@
                             <div class="classynav">
                                 <ul>
                                     <li class="active"><a href="home">Home</a></li>
-                                    <li><a href="test">Recipes</a></li>
+                                    <li><a href="/api">Search</a></li>
                                     <li><a>Categories</a>
                                             <ul class="dropdown">
-                                                <li><a href="categories/1">Main Courses</a></li>
-                                                <li><a href="categories/2">Desserts</a></li>
+                                                <li><a href="/categories/1">Main Courses</a></li>
+                                                <li><a href="/categories/2">Desserts</a></li>
                                             </ul>
                                     </li>
-                                    <li><a href="about">About</a></li>
+                                    <li><a href="/about">About</a></li>
                                           <c:choose>
                                               <c:when test="${currentUser.id==null }">
                                                   <li><a href="/login">Login</a></li>
@@ -186,7 +186,7 @@
                         <div class="col-12 col-md-9 col-lg-7 col-xl-6">
                             <div class="hero-slides-content" data-animation="fadeInUp" data-delay="100ms">
                                 <h2 data-animation="fadeInUp" data-delay="300ms">Welcome!!</h2>
-<p data-animation="fadeInUp" data-delay="700ms">A Perfect Tasty  Plate leads to a happy tummy . Our Website brings professional recipes to your home for you to  prepare delicious, customized meals. It's a fresh, clean site that feels honest and dependable by incorporating bright backgrounds and friendly imagery.  Get Ready To be creative with IRecipe!</p>
+<p data-animation="fadeInUp" data-delay="700ms">Our team loves food and the way it helps us take care of our bodies. WE combine this with ideas that will help us rethink the idea of food in general giving you tools to be successful, healthy and happy.</p>
 
                             </div>
                         </div>
