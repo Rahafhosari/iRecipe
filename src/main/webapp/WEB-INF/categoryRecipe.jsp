@@ -1,203 +1,187 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 
     <!-- Title -->
-    <title>iRecipe | ${recipe.name}</title>
+    <title>iRecipe | Categories</title>
 
     <!-- Favicon -->
-    <link rel="icon" href="img/core-img/favicon.ico">
+    <link rel="icon" href="${pageContext.request.contextPath}/img/favicon.ico">
 
     <!-- Core Stylesheet -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/style.css">
     <style>
         @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,200italic,300,300italic,400italic,600,600italic,700,700italic,900,900italic);
-    .cta-section {
-        background: rgba(0, 0, 0, 0) url("https://res.cloudinary.com/sanitarium/image/fetch/q_auto/https://www.sanitarium.com.au/getmedia%2Fae51f174-984f-4a70-ad3d-3f6b517b6da1%2Ffruits-vegetables-healthy-fats.jpg%3Fwidth%3D1180%26height%3D524%26ext%3D.jpg") no-repeat scroll left top / cover;
-        padding: 55px 0;
-    }
-    #box{
-        height: 350px;
-        width: 600px;
-        outline: 7px solid #f14444;
-        margin-top: 20px;
-        padding: 10px;
-    }
-    #box2{
-        max-height: 210px;
-        overflow: auto;
-        width: 600px;
-        outline: 7px solid #f14444;
-        margin-top: 20px;
-        padding: 10px;
-    }
-    .black-trans-bg {
-        position: relative;
-    }
-    .black-trans-bg::before {
-        background: #000 none repeat scroll 0 0;
-        content: "";
-        height: 100%;
-        left: 0;
-        opacity: 0.3;
-        position: absolute;
-        top: 0;
-        width: 100%;
-        z-index: 0;
-    }
-    .cta-title h2 {
-        color: #fff;
-        display: inline-block;
-        font-size: 26px;
-        line-height: 30px;
-        padding: 16px 0;
-        text-transform: uppercase;
-    }
-    .cta-title a {
-        margin-top:26px;
-        border: 1px solid #fff;
-        color: #fff;
-        display: inline-block;
-        float: right;
-        font-size: 16px;
-        font-weight: 700;
-        letter-spacing: 0;
-        padding: 9px 18px;
-        text-transform: uppercase;
-    }
+        .cta-section {
+            background: rgba(0, 0, 0, 0) url("https://res.cloudinary.com/sanitarium/image/fetch/q_auto/https://www.sanitarium.com.au/getmedia%2Fae51f174-984f-4a70-ad3d-3f6b517b6da1%2Ffruits-vegetables-healthy-fats.jpg%3Fwidth%3D1180%26height%3D524%26ext%3D.jpg") no-repeat scroll left top / cover;
+            padding: 55px 0;
+        }
+        .black-trans-bg {
+            position: relative;
+        }
+        .black-trans-bg::before {
+            background: #000 none repeat scroll 0 0;
+            content: "";
+            height: 100%;
+            left: 0;
+            opacity: 0.3;
+            position: absolute;
+            top: 0;
+            width: 100%;
+            z-index: 0;
+        }
+        .cta-title h2 {
+            color: #fff;
+            display: inline-block;
+            font-size: 26px;
+            line-height: 30px;
+            padding: 16px 0;
+            text-transform: uppercase;
+        }
+        .cta-title a {
+            margin-top:26px;
+            border: 1px solid #fff;
+            color: #fff;
+            display: inline-block;
+            float: right;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 0;
+            padding: 9px 18px;
+            text-transform: uppercase;
+        }
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            line-height: 1.5;
+            color: #323232;
+            font-size: 15px;
+            font-weight: 400;
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+            -moz-font-smoothing: antialiased;
+        }
+        .heading-title {
+            margin-bottom: 100px;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .heading-title h3 {
+            margin-bottom: 0;
+            letter-spacing: 2px;
+            font-weight: normal;
+        }
+        .p-top-30 {
+            padding-top: 30px;
+        }
+        .half-txt {
+            width: 60%;
+            margin: 0 auto;
+            display: inline-block;
+            line-height: 25px;
+            color: #7e7e7e;
+        }
+        .text-uppercase {
+            text-transform: uppercase;
+        }
 
-    body {
-        font-family: 'Source Sans Pro', sans-serif;
-        line-height: 1.5;
-        color: #323232;
-        font-size: 15px;
-        font-weight: 400;
-        text-rendering: optimizeLegibility;
-        -webkit-font-smoothing: antialiased;
-        -moz-font-smoothing: antialiased;
-    }
-    .heading-title {
-        margin-bottom: 100px;
-    }
-    .text-center {
-        text-align: center;
-    }
-    .heading-title h3 {
-        margin-bottom: 0;
-        letter-spacing: 2px;
-        font-weight: normal;
-    }
-    .p-top-30 {
-        padding-top: 30px;
-    }
-    .half-txt {
-        width: 60%;
-        margin: 0 auto;
-        display: inline-block;
-        line-height: 25px;
-        color: #7e7e7e;
-    }
-    .text-uppercase {
-        text-transform: uppercase;
-    }
+        .team-member, .team-member .team-img {
+            position: relative;
+        }
+        .team-member {
+            overflow: hidden;
+        }
+        .team-member, .team-member .team-img {
+            position: relative;
+        }
 
-    .team-member, .team-member .team-img {
-        position: relative;
-    }
-    .team-member {
-        overflow: hidden;
-    }
-    .team-member, .team-member .team-img {
-        position: relative;
-    }
-
-    .team-hover {
-        position: absolute;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        margin: 0;
-        border: 20px solid rgba(0, 0, 0, 0.1);
-        background-color: rgba(255, 255, 255, 0.90);
-        opacity: 0;
-        -webkit-transition: all 0.3s;
-        transition: all 0.3s;
-    }
-    .team-member:hover .team-hover .desk {
-        top: 35%;
-    }
-    .team-member:hover .team-hover, .team-member:hover .team-hover .desk, .team-member:hover .team-hover .s-link {
-        opacity: 1;
-    }
-    .team-hover .desk {
-        position: absolute;
-        top: 0%;
-        width: 100%;
-        opacity: 0;
-        -webkit-transform: translateY(-55%);
-        -ms-transform: translateY(-55%);
-        transform: translateY(-55%);
-        -webkit-transition: all 0.3s 0.2s;
-        transition: all 0.3s 0.2s;
-        padding: 0 20px;
-    }
-    .desk, .desk h4, .team-hover .s-link a {
-        text-align: center;
-        color: #222;
-    }
-    .team-member:hover .team-hover .s-link {
-        bottom: 10%;
-    }
-    .team-member:hover .team-hover, .team-member:hover .team-hover .desk, .team-member:hover .team-hover .s-link {
-        opacity: 1;
-    }
-    .team-hover .s-link {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        opacity: 0;
-        text-align: center;
-        -webkit-transform: translateY(45%);
-        -ms-transform: translateY(45%);
-        transform: translateY(45%);
-        -webkit-transition: all 0.3s 0.2s;
-        transition: all 0.3s 0.2s;
-        font-size: 35px;
-    }
-    .desk, .desk h4, .team-hover .s-link a {
-        text-align: center;
-        color: #222;
-    }
-    .team-member .s-link a {
-        margin: 0 10px;
-        color: #333;
-        font-size: 16px;
-    }
-    .team-title {
-        position: static;
-        padding: 20px 0;
-        display: inline-block;
-        letter-spacing: 2px;
-        width: 100%;
-    }
-    .team-title h5 {
-        margin-bottom: 0px;
-        display: block;
-        text-transform: uppercase;
-    }
-    .team-title span {
-        font-size: 12px;
-        text-transform: uppercase;
-        color: #a5a5a5;
-        letter-spacing: 1px;
-    }
+        .team-hover {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            margin: 0;
+            border: 20px solid rgba(0, 0, 0, 0.1);
+            background-color: rgba(255, 255, 255, 0.90);
+            opacity: 0;
+            -webkit-transition: all 0.3s;
+            transition: all 0.3s;
+        }
+        .team-member:hover .team-hover .desk {
+            top: 35%;
+        }
+        .team-member:hover .team-hover, .team-member:hover .team-hover .desk, .team-member:hover .team-hover .s-link {
+            opacity: 1;
+        }
+        .team-hover .desk {
+            position: absolute;
+            top: 0%;
+            width: 100%;
+            opacity: 0;
+            -webkit-transform: translateY(-55%);
+            -ms-transform: translateY(-55%);
+            transform: translateY(-55%);
+            -webkit-transition: all 0.3s 0.2s;
+            transition: all 0.3s 0.2s;
+            padding: 0 20px;
+        }
+        .desk, .desk h4, .team-hover .s-link a {
+            text-align: center;
+            color: #222;
+        }
+        .team-member:hover .team-hover .s-link {
+            bottom: 10%;
+        }
+        .team-member:hover .team-hover, .team-member:hover .team-hover .desk, .team-member:hover .team-hover .s-link {
+            opacity: 1;
+        }
+        .team-hover .s-link {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            opacity: 0;
+            text-align: center;
+            -webkit-transform: translateY(45%);
+            -ms-transform: translateY(45%);
+            transform: translateY(45%);
+            -webkit-transition: all 0.3s 0.2s;
+            transition: all 0.3s 0.2s;
+            font-size: 35px;
+        }
+        .desk, .desk h4, .team-hover .s-link a {
+            text-align: center;
+            color: #222;
+        }
+        .team-member .s-link a {
+            margin: 0 10px;
+            color: #333;
+            font-size: 16px;
+        }
+        .team-title {
+            position: static;
+            padding: 20px 0;
+            display: inline-block;
+            letter-spacing: 2px;
+            width: 100%;
+        }
+        .team-title h5 {
+            margin-bottom: 0px;
+            display: block;
+            text-transform: uppercase;
+        }
+        .team-title span {
+            font-size: 12px;
+            text-transform: uppercase;
+            color: #a5a5a5;
+            letter-spacing: 1px;
+        }
     </style>
+
 </head>
 <body>
 <!-- Preloader -->
@@ -250,7 +234,7 @@
                     <!-- Logo -->
                     <p>Welcome <c:out value="${currentUser.username}"></c:out></p>
 
-                    <a class="nav-brand" href="/home"><img src="img/core-img/irecipefinalcut200.png" alt="logo"></a>
+                    <a class="nav-brand" href="/home"><img src="${pageContext.request.contextPath}/img/core-img/irecipefinalcut200.png" alt="logo"></a>
 
                     <!-- Navbar Toggler -->
                     <div class="classy-navbar-toggler">
@@ -268,9 +252,9 @@
                         <!-- Nav Start -->
                         <div class="classynav">
                             <ul>
-                                <li class="active"><a href="home">Home</a></li>
+                                <li><a href="home">Home</a></li>
                                 <li><a href="test">Recipes</a></li>
-                                <li><a>Categories</a>
+                                <li class="active"><a>Categories</a>
                                     <ul class="dropdown">
                                         <li><a href="categories/1">Main Courses</a></li>
                                         <li><a href="categories/2">Desserts</a></li>
@@ -322,12 +306,13 @@
     </div>
 </header>
 <!-- ##### Header Area End ##### -->
+
 <div class="cta-section black-trans-bg">
     <div class="container">
         <div class="row">
             <div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
                 <div class="cta-title">
-                    <h2>IRecipe,A Perfect Tasty  Plate leads to a happy tummy</h2>
+                    <h2>iRecipe,A Perfect Tasty  Plate leads to a happy tummy</h2>
                 </div>
             </div>
         </div>
@@ -335,51 +320,33 @@
 </div>
 <div class="container">
     <div class="row">
-
+        <div class="heading-title text-center">
+            <h3 class="text-uppercase">${category.name}</h3>
+            <p class="p-top-30 half-txt">${category.description} </p>
+        </div>
+    <c:forEach items="${ category.recipe }" var="rec">
         <div class="col-md-4 col-sm-4">
             <div class="team-member">
                 <div class="team-img">
-                    <img  style="padding-top: 15px;" src="/img/${recipe.image}.jpg" alt="team member" class="img-responsive">
+                    <img style="height: 301px"width="390px" src="${pageContext.request.contextPath}/img/${rec.image}.jpg" class="img-responsive">
                 </div>
                 <div class="team-hover">
                     <div class="desk">
-                        <h4>${recipe.name}</h4>
+                        <a href="/recipes/${ rec.id }">${ rec.name }</a></li>
+                    </div>
+                    <div class="s-link">
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-google-plus"></i></a>
                     </div>
                 </div>
             </div>
             <div class="team-title">
-                <h5>${recipe.name}<br><a href="/recipes/${recipe.id}/fav" style="color: #f14444"> ADD to Favourite</a></h5>
+                <a href="/recipes/${ rec.id }">${ rec.name }</a></li>
             </div>
-
         </div>
-        <div class="col-md-4 col-sm-4">
-            <div class="team-member" id="box">
-                    ${recipe.description}
-            </div>
-            <div class="team-member" id="box2">
-                <form:form action="/addComment" method="POST" modelAttribute="comm">
-                    <div class="form-group">
-                        <form:input cssClass="txtbox" type="textarea" path="comment"/>
-                        <form:label path="comment" cssStyle="color: #f14444">Add Comment</form:label>
+    </c:forEach>
 
-                        <form:hidden path="user" value="${user.id}"/>
-                        <form:hidden path="recipe" value="${recipe.id}"/>
-
-                        <input class="btn" style="background-color: #f14444;color: whitesmoke" type="submit" value="Submit">
-                        <form:errors cssClass="red" path="comment.*"/>
-                    </div>
-                    <hr>
-                </form:form>
-                <c:forEach items="${comments}" var="com">
-                    <div class="comment">
-                        <div class="left">
-                                ${com.user.username} Review :--- ${com.comment}
-                        </div>
-                    </div>
-                </c:forEach>
-            </div>
-
-        </div>
     </div>
 </div>
 <!-- ##### Footer Area Start ##### -->
@@ -397,7 +364,7 @@
                 </div>
                 <!-- Footer Logo -->
                 <div class="footer-logo">
-                    <a href="/home"><img src="img/core-img/irecipefinalcut200.png" alt="irecipe"></a>
+                    <a href="/home"><img src="${pageContext.request.contextPath}/img/core-img/irecipefinalcut200.png" alt="irecipe"></a>
                 </div>
                 <!-- Copywrite -->
                 <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
@@ -408,7 +375,6 @@
     </div>
 </footer>
 <!-- ##### Footer Area End ##### -->
-
 <!-- ##### All Javascript Files ##### -->
 <!-- jQuery-2.2.4 js -->
 <script src="js/jquery/jquery-2.2.4.min.js"></script>

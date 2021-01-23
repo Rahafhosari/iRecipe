@@ -50,7 +50,7 @@ public class irecipeController {
         model.addAttribute("category", category1);
 //        List<Recipe> recipesInCategory = irecipeService.findRecipeByCategory(category1);
 //        model.addAttribute("recipes",recipesInCategory);
-        return ("categoryRecipes.jsp");
+        return ("categoryRecipe.jsp");
     }
 
     @RequestMapping("/recipes/{id}")
@@ -130,8 +130,16 @@ public class irecipeController {
     public String test () {
         return "categorytest.jsp";
     }
+
     @RequestMapping("/api")
     public String api(){
         return "spoonacular.jsp";
     }
+
+    @RequestMapping("/about")
+    public String about (HttpSession session, Model model) {
+        Long userId = (Long) session.getAttribute("userId");
+        User u = irecipeService.findUserById(userId);
+        model.addAttribute("user", u);
+        return "aboutUs.jsp";}
 }
