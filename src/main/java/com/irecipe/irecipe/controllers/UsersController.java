@@ -69,9 +69,7 @@ public class UsersController {
         model.addAttribute("currentUser", userService.findByUsername(username));
         User user1=userService.findByUsername(username);
         session.setAttribute("userId", user1.getId());
-
         return "homePage.jsp";
     }
-
 }
 

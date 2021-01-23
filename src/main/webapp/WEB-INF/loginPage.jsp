@@ -32,6 +32,11 @@
                             <input type="checkbox" class="form-check-input">
                             <small>Remember Me</small>
                         </label>
+                        <div class="form-check">
+                            <c:if test="${errorMessage != null}">
+                                <c:out value="${errorMessage}"></c:out>
+                            </c:if>
+                        </div>
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                     </div>
                     <div><button type="submit" class="btn btn-login float-right">Login</button></div>

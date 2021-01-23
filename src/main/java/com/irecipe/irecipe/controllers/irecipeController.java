@@ -126,4 +126,12 @@ public class irecipeController {
         return "userPage.jsp";
     }
 
+    @RequestMapping("/test")
+    public String test () {
+        return "categorytest.jsp";
+    }
+    @RequestMapping("/api")
+    public String api(){
+        return "spoonacular.jsp";
+    }
 }
